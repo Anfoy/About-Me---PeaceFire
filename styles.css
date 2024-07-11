@@ -1,4 +1,4 @@
-/* Ensure the body and html elements fill the entire viewport, with a centered background image and no margin or padding */
+/* General styles for body and html elements */
 body, html {
     position: relative;
     margin: 0;
@@ -11,29 +11,52 @@ body, html {
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    font-family: 'Comic Neue', sans-serif;
 }
 
-/* Style for the container holding the text, positioning it at the top center */
-.text-container {
+/* Permanent text container */
+.permanent-text {
     position: absolute;
-    top: 10%;
+    top: 5%;
     width: 100%;
     text-align: center;
     color: white;
+    font-size: 1.5em;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10%;
+}
+
+/* Permanent text spans */
+.left-text, .center-text, .right-text {
+    flex: 1;
+    text-align: center;
+    cursor: pointer;
+    animation: color-wave 2s infinite;
+}
+
+/* Container for typing text */
+.text-container {
+    position: absolute;
+    top: 20%;
+    width: 100%;
+    text-align: center;
+    color: gray;
     font-size: 2em;
-    z-index: 10; /* Ensure the text is above other elements */
+    z-index: 10;
 }
 
-/* Style for the text that will be typed out, with a blinking caret */
+/* Typing text with blinking caret */
 .typing-text {
-    display: none; /* Initially hide all text elements */
-    border-right: 2px solid white; /* Blinking caret */
-    white-space: nowrap; /* Prevent text from wrapping */
-    overflow: hidden; /* Hide overflow */
-    animation: blink-caret 0.75s step-end infinite; /* Blinking caret animation */
+    display: none;
+    border-right: 2px solid gray;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: blink-caret 0.75s step-end infinite;
 }
 
-/* Style for the campfire container, positioning it in the center */
+/* Campfire container */
 .campfire {
     position: relative;
     width: 200px;
@@ -43,42 +66,81 @@ body, html {
     align-items: center;
 }
 
-/* Style for the pile of logs, including size, background image, and filter effects */
+/* Pile of logs */
 .pileOfLogs {
     width: 35%;
     height: 35%;
     background: url('pictures/finalog.png') no-repeat center center;
     background-size: contain;
     filter: contrast(120%) brightness(90%);
-    margin-bottom: -370px; /* Adjust positioning */
+    margin-bottom: -370px;
 }
 
-/* Style for the fire, including size, background image, and flicker animation */
+/* Fire */
 .fire {
     position: absolute;
     width: 35%;
     height: 35%;
     background: url('pictures/fire.png') no-repeat center center;
     background-size: contain;
-    animation: flicker 3s infinite; /* Fire flicker animation */
-    margin-bottom: -320px; /* Adjust positioning */
+    animation: flicker 3s infinite;
+    margin-bottom: -320px;
 }
 
-/* Style for the smoke, including size, background color, and rise animation */
+/* Smoke */
 .smoke {
     position: absolute;
     background-color: rgba(0, 0, 0, 1);
-    border-radius: 50%; /* Make the smoke circular */
-    animation: rise 4s linear forwards; /* Smoke rise animation */
+    border-radius: 50%;
+    animation: rise 4s linear forwards;
 }
 
-/* Keyframe animation for the fire flicker effect */
+/* Fade text container */
+.fade-text-container {
+    position: absolute;
+    top: 35%;
+    width: 80%;
+    max-width: 800px;
+    text-align: center;
+    z-index: 10;
+}
+
+/* Fade text */
+.fade-text {
+    font-size: 2em;
+    color: goldenrod;
+    display: none;
+    word-wrap: break-word;
+    white-space: normal;
+    font-family: "Josefin Sans", sans-serif;
+}
+
+/* Links in fade text */
+.fade-text a {
+    color: orangered;
+    text-decoration: underline;
+}
+
+.fade-text a:hover {
+    color: #f00;
+}
+
+/* Glittering circles */
+.glitter-circle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    opacity: 0;
+    animation: glitter-animation 3s forwards;
+}
+
+/* Keyframe animations */
 @keyframes flicker {
     0%, 100% { opacity: 0.7; }
     50% { opacity: 1.0; }
 }
 
-/* Keyframe animation for the smoke rising effect */
 @keyframes rise {
     0% {
         transform: translateX(-50%) scale(var(--scale));
@@ -90,20 +152,33 @@ body, html {
     }
 }
 
-/* Keyframe animation for typing effect, increasing the width of the text */
-@keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
-}
-
-/* Keyframe animation for the blinking caret effect */
 @keyframes blink-caret {
     from, to { border-color: transparent; }
-    50% { border-color: white; }
+    50% { border-color: gray; }
 }
 
-/* Keyframe animation for the fade-out effect, decreasing the opacity of the text */
 @keyframes fade-out {
     from { opacity: 1; }
     to { opacity: 0; }
+}
+
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes color-wave {
+    0%, 100% { color: white; }
+    50% { color: silver; }
+}
+
+@keyframes glitter-animation {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1.5);
+    }
 }
